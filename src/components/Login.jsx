@@ -1,3 +1,4 @@
+import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
 
 const Login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
   const isSubmitDisabled = formData.username === '' || formData.password === '';
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div data-testid = "app-container" className="flex items-center justify-center min-h-screen">
       <div className="bg-white p-20 rounded shadow-md w-full max-w-md">
         {loginMessage && (
           <p className={loginMessage === 'Login Successfully'}>
@@ -60,13 +61,13 @@ const Login = () => {
             />
           </div>
           <div>
-            <button
+            <Button
               type="submit"
               className={`bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none ${isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={isSubmitDisabled}
             >
               Login
-            </button>
+            </Button>
           </div>
         </form>
       </div>
