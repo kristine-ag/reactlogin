@@ -1,5 +1,6 @@
-import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
+import Button from './Button'
+import Input from './Input'; // Import the Input component
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -21,49 +22,47 @@ const Login = () => {
     e.preventDefault();
 
     if (formData.username === 'root' && formData.password === 'root') {
-      alert('Login Successfully')
+      setLoginMessage('Login Successfully');
     } else {
-      alert('Login Unsuccessful')
+      setLoginMessage('Login Unsuccessful');
     }
   };
 
   const isSubmitDisabled = formData.username === '' || formData.password === '';
 
   return (
-    <div data-testid = "app-container" className="flex items-center justify-center min-h-screen">
+    <div data-testid="app-container" className="flex items-center justify-center min-h-screen">
       <div className="bg-white p-20 rounded shadow-md w-full max-w-md">
         {loginMessage && (
-          <p className={loginMessage === 'Login Successfully'}>
+          <p className={loginMessage === 'Login Successfully' ? 'text-green-500' : 'text-red-500'}>
             {loginMessage}
           </p>
         )}
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-600">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              className="border w-full p-3"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-600">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              className="border w-full p-3"
-            />
-          </div>
+          {/* Use the Input component for username */}
+          <Input
+            label="Username"
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+          {/* Use the Input component for password */}
+          <Input
+            label="Password"
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
           <div>
             <Button
               type="submit"
-              className={`bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none ${isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none ${
+                isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
               disabled={isSubmitDisabled}
             >
               Login
